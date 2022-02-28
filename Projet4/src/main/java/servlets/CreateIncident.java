@@ -75,6 +75,7 @@ public class CreateIncident extends HttpServlet {
 		{
 			ArrayList<Hero> heroes = heroRepository.getAllHeroesForIncident(incident);
 			request.setAttribute("incidentId", incident.getId());
+			request.setAttribute("code", incident.getCode());
 			request.setAttribute("heroes", heroes);
 			this.getServletContext().getRequestDispatcher("/WEB-INF/assignHeroToIncident.jsp").forward(request, response);
 		}

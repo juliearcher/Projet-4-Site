@@ -8,6 +8,7 @@
 </head>
 <body>
 <form method="post" action="assignHeroToIncident">
+<c:if test="${not empty code }">Votre code pour assigner le héro ultérieurement est : ${ code }</c:if>
 	<table>
 		<tr>
 		<td><input type="text" name="incidentId" value="${ incidentId }" hidden/></td>

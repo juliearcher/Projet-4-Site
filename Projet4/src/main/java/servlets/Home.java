@@ -6,9 +6,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repositories.HeroRepository;
+import repositories.IncidentTypeRepository;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.util.ArrayList;
+import java.util.Base64;
+import java.util.UUID;
 
 import beans.Hero;
 
@@ -18,6 +22,7 @@ import beans.Hero;
 public class Home extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final HeroRepository heroRepository;
+	private final IncidentTypeRepository incidentTypeRepository;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -25,6 +30,7 @@ public class Home extends HttpServlet {
     public Home() {
         super();
         heroRepository = new HeroRepository();
+        incidentTypeRepository = new IncidentTypeRepository();
         // TODO Auto-generated constructor stub
     }
 
@@ -35,10 +41,13 @@ public class Home extends HttpServlet {
 		// TODO Auto-generated method stub
 
 		ArrayList<Hero> heroes = heroRepository.getAllHeroes();
+		for (Hero hero : heroes) {
+			hero.setEmail(incidentTypeRepository.getHeroIncidentTypes(hero));
+		}
 		request.setAttribute("heroes", heroes);
 		this.getServletContext().getRequestDispatcher("/WEB-INF/home.jsp").forward(request, response);
 	}
-
+	
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

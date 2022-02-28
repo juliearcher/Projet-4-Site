@@ -55,4 +55,14 @@
     <servlet-name>AssignHeroToIncident</servlet-name>
     <url-pattern>/assignHeroToIncident</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetIncident</display-name>
+    <servlet-name>GetIncident</servlet-name>
+    <servlet-class>servlets.GetIncident</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetIncident</servlet-name>
+    <url-pattern>/getIncident</url-pattern>
+  </servlet-mapping>
 </web-app>

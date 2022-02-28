@@ -10,6 +10,7 @@ public class Incident {
 	private String city;
 	private BigDecimal latitude;
 	private BigDecimal longitude;
+	private String code;
 	private Timestamp sysCreatedDate;
 	
 	public Incident(int incidentTypeID, String city, BigDecimal latitude, BigDecimal longitude) {
@@ -99,6 +100,14 @@ public class Incident {
 
 	public void setCity(String city) {
 		this.city = city;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}	
 	
 	

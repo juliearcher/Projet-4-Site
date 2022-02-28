@@ -22,12 +22,10 @@ public class GPSCoordinates {
 	}
 	public double calculateDistance(GPSCoordinates coordGps) {
 		double distance = gps2m(latitude, longitude, coordGps.getLatitude(), coordGps.getLongitude());
-		System.out.println("Distance=" + distance);
 		return distance;
 	}
 	public static double calculateDistance(BigDecimal lat1, BigDecimal lng1, BigDecimal lat2, BigDecimal lng2) {
 		double distance = gps2m(lat1, lng1, lat2, lng2);
-		System.out.println("Distance=" + distance);
 		return distance;
 	}
 	private static double gps2m(BigDecimal lat_a, BigDecimal lng_a, BigDecimal lat_b, BigDecimal lng_b) {	
@@ -56,7 +54,6 @@ public class GPSCoordinates {
 		fullAddress = fullAddress.replace('ê', 'e');
 		try {
 			URL url = new URL("https://nominatim.openstreetmap.org/search?q=" + fullAddress +  "&format=json");
-			System.out.println("url=" + url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 	        conn.setRequestProperty("Accept", "application/json");
@@ -81,8 +78,6 @@ public class GPSCoordinates {
 	        else {
 	        	@SuppressWarnings("unchecked")
 				HashMap<String, String> map = (HashMap<String, String>) infoAddress.get(0);
-	        	System.out.println(map.get("lat"));
-	        	System.out.println(map.get("lon"));
 		        GPSCoordinates = new GPSCoordinates(new BigDecimal(map.get("lat")), new BigDecimal(map.get("lon")));
 	        }
 	        conn.disconnect();
