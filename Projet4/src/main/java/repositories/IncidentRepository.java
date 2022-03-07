@@ -4,11 +4,14 @@ import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Base64;
 
 import beans.Hero;
 import beans.Incident;
+import beans.IncidentType;
 import utils.SqlConnection;
 
 public class IncidentRepository {
@@ -120,5 +123,30 @@ public class IncidentRepository {
 			e.printStackTrace();
 		}
 		return incident;
+	}
+	
+	public ArrayList<Incident> getHeroIncidents(Hero hero) {
+		ArrayList<Incident> incidents = new ArrayList<>();
+		Incident incident = null;
+		
+		ResultSet result;
+		try {
+			PreparedStatement prepare = this.connection.prepareStatement(
+			      	"SELECT incidents.*, incidenttypes.Name Name FROM incidents LEFT JOIN incidenttypes ON incidents.IncidentTypeID = incidenttypes.ID WHERE incidents.HeroID = ?;"
+			      );
+			prepare.setInt(1, hero.getId());
+			result = prepare.executeQuery();
+			while (result.next()) {
+				incident = new Incident(result.getInt("ID"), result.getInt("IncidentTypeID"), result.getInt("HeroID"),
+						result.getString("City"), result.getBigDecimal("Latitude"), result.getBigDecimal("Longitude"), result.getTimestamp("sysCreatedDate"));
+				incident.setCode(result.getString("Name"));
+				incidents.add(incident);
+			}
+			prepare.close();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return incidents;
 	}
 }

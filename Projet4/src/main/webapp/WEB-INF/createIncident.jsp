@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="navigationBar.jsp" %>
 <form method="post" action="createIncident" ${ empty incidentId || incidentId == 0 ? '' : 'style="display:none;"' }>
 	<table>
 		<tr>

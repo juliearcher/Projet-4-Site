@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Create new Hero</title>
-</head>
 <body>
-<%@ include file="navigationBar.jsp" %>
+<h4 class="mb-3">Créer un compte</h4>
+
 <form method="post" action="createHero">
 	<table>
 		<tr>
-			<td><label for="name">Nom de héro</label></td>
+			<td><label for="name">Nom de héros</label></td>
 			<td><input type="text" name="name" value="${ name }" required/></td>
 		</tr>
 		<tr>
@@ -37,7 +32,8 @@
 			<td><input type="password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Au moins 8 caractères dont un chiffre, une lettre miniscule et une lettre majuscule" required/></td>
 		</tr>
 	</table>
-	<p>Types d'incidents maitrisés (1 à 3)</p>
+	<br/>
+	<h5 class="mb-3">Types d'incidents maitrisés (1 à 3)</h4>
 	<table>
 	<c:forEach items="${ incidentTypes }" var="type" varStatus="status">
 		<c:if test="${ status.count % 2 != 0 }"><tr></c:if>
@@ -57,5 +53,12 @@
 	<input type="submit" value="OK" />
 </form>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+$("input:checkbox").click(function() {
+    let bol = $("input:checkbox:checked").length >=3;     
+    $("input:checkbox").not(":checked").attr("disabled",bol);
+    });
+</script>
 </body>
 </html>

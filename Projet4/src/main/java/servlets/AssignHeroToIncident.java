@@ -41,16 +41,21 @@ public class AssignHeroToIncident extends HttpServlet {
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * Vérifier si le héro est bien adapté au type de l'incident
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int incidentId = Integer.parseInt(request.getParameter("incidentId"));
-		int heroId = Integer.parseInt(request.getParameter("heroId"));
+		String param = request.getParameter("incidentId");
+		int incidentId = param == null ? 0 : Integer.parseInt(param);
+		param = request.getParameter("heroId");
+		int heroId = param == null ? 0 : Integer.parseInt(param);
 		Incident incident = incidentRepository.getIncidentById(incidentId);
-		if (incident == null) {
+		if (heroId == 0) {
+			setOldFormParameters(request, response, incident, incidentId, "Veuillez sélectionner un héros");	
+		}
+		else if (incident == null) {
 			setOldFormParameters(request, response, incident, incidentId, "Cet incident n'existe pas");			
 		}
-		if (incidentRepository.updateIncidentHero(incidentId, heroId) == false)	{
+		else if (incidentRepository.updateIncidentHero(incidentId, heroId) == false)	{
 			setOldFormParameters(request, response, incident, incidentId, "Erreur de base de données, veuillez essayez ultérieurement");
 		}
 		else

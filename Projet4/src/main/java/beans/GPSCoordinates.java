@@ -66,7 +66,6 @@ public class GPSCoordinates {
 	        String readLine;
 	        while ((readLine = reader.readLine()) != null) {
 	             sb.append(readLine);
-	             System.out.println("readLine=" + readLine);
 	        }
 	        JSONParser parser = new JSONParser(sb.toString());
 	       // JSONArray infoAdresse = (JSONArray) parser.parseArray();

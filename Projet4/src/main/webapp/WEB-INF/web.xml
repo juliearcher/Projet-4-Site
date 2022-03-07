@@ -65,4 +65,34 @@
     <servlet-name>GetIncident</servlet-name>
     <url-pattern>/getIncident</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Login</display-name>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>servlets.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>Logout</display-name>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>servlets.Logout</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>GetHeroIncidents</display-name>
+    <servlet-name>GetHeroIncidents</servlet-name>
+    <servlet-class>servlets.GetHeroIncidents</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>GetHeroIncidents</servlet-name>
+    <url-pattern>/getHeroIncidents</url-pattern>
+  </servlet-mapping>
 </web-app>
