@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Comparator;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
@@ -145,6 +146,12 @@ public class HeroRepository {
 					heroes.add(hero);
 				}
 			}
+			heroes.sort(new Comparator<Hero>() {
+				@Override
+				public int compare(Hero hero1, Hero hero2) {
+			        return(int)( hero1.getDistance() - hero2.getDistance());
+			    }
+			});
 			prepare.close();
 			
 		} catch (SQLException e) {

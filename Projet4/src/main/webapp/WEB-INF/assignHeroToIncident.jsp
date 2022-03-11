@@ -9,14 +9,18 @@
 </head>
 <body>
 <form method="post" action="assignHeroToIncident">
-<c:if test="${not empty code }">Votre code pour assigner le héros ultérieurement est : ${ code }</c:if>
-	<table>
+<c:if test="${not empty code }"><p style="color:red;">Votre code pour assigner le héros ultérieurement est : ${ code }</p></c:if>
+
+<div class="table-responsive">
+	<table class="table table-striped table-sm">
+	<thead>
 		<tr>
-		<td><input type="text" name="incidentId" value="${ incidentId }" hidden/></td>
-		<td><p>Nom du Héros</p></td>
-		<td><p>Numéro de téléphone</p></td>
-		<td><p>Distance de l'incident</p></td>
+			<th scope="col"><input type="text" name="incidentId" value="${ incidentId }" hidden/></th>
+			<th scope="col">Nom du Héros</th>
+			<th scope="col">Numéro de téléphone</th>
+			<th scope="col">Distance de l'incident</th>
 		</tr>
+		</thead>
 		<c:forEach items="${ heroes }" var="hero">
 		<c:set var="distance"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${ hero.distance }" /></c:set>
 		<c:set var="distance2"><fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${ hero.distance/1000 }" /></c:set>
@@ -28,6 +32,7 @@
 		</tr>
 		</c:forEach>
 	</table>
+</div>
 	<c:if test="${ not empty errorMessage }"><p style="color:red;">${errorMessage }</p></c:if>
 	<input type="submit" value="OK" />
 </form>

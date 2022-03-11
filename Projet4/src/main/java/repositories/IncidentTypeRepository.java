@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import beans.Hero;
+import beans.Incident;
 import beans.IncidentType;
 import utils.SqlConnection;
 
@@ -62,5 +63,25 @@ public class IncidentTypeRepository {
 			e.printStackTrace();
 		}
 		return "Erreur";
+	}
+	
+	public Boolean canTheHeroHandleTheIncident(int heroId, int incidentId)
+	{
+		ResultSet result;
+		Boolean r;
+		try {
+			PreparedStatement prepare = this.connection.prepareStatement(
+			      	"SELECT * FROM heroes_incidenttypes i " +
+			      	" WHERE i.HeroID = ? AND i.IncidentTypeID = ?;");
+			prepare.setInt(1, heroId);
+			prepare.setInt(2, incidentId);
+			result = prepare.executeQuery();
+			r = result.next();
+			prepare.close();
+			return r;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return false;
 	}
 }

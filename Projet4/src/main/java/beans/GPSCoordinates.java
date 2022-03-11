@@ -50,8 +50,16 @@ public class GPSCoordinates {
 		String fullAddress = address + " " + zipcode + " " + city;
 		fullAddress = fullAddress.replace('è', 'e');
 		fullAddress = fullAddress.replace('é', 'e');
-		fullAddress = fullAddress.replace('î', 'i');
 		fullAddress = fullAddress.replace('ê', 'e');
+		fullAddress = fullAddress.replace('ë', 'e');
+		fullAddress = fullAddress.replace('î', 'i');
+		fullAddress = fullAddress.replace('ï', 'i');
+		fullAddress = fullAddress.replace('ç', 'c');
+		fullAddress = fullAddress.replace('à', 'a');
+		fullAddress = fullAddress.replace('ä', 'a');
+		fullAddress = fullAddress.replace('ù', 'u');
+		fullAddress = fullAddress.replace('ü', 'u');
+
 		try {
 			URL url = new URL("https://nominatim.openstreetmap.org/search?q=" + fullAddress +  "&format=json");
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();

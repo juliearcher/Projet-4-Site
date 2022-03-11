@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import repositories.HeroRepository;
 import repositories.IncidentRepository;
+import repositories.IncidentTypeRepository;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -21,6 +22,7 @@ import beans.IncidentType;
 public class AssignHeroToIncident extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private final IncidentRepository incidentRepository;
+	private final IncidentTypeRepository incidentTypeRepository;
 	private final HeroRepository heroRepository;
        
     /**
@@ -29,6 +31,7 @@ public class AssignHeroToIncident extends HttpServlet {
     public AssignHeroToIncident() {
         super();
         incidentRepository = new IncidentRepository();
+        incidentTypeRepository = new IncidentTypeRepository();
         heroRepository = new HeroRepository();
     }
 
@@ -54,6 +57,9 @@ public class AssignHeroToIncident extends HttpServlet {
 		}
 		else if (incident == null) {
 			setOldFormParameters(request, response, incident, incidentId, "Cet incident n'existe pas");			
+		}
+		else if (!incidentTypeRepository.canTheHeroHandleTheIncident(heroId, incidentId)) {
+			setOldFormParameters(request, response, incident, incidentId, "Ce héros n'est pas habilité à résoudre cet incident.");			
 		}
 		else if (incidentRepository.updateIncidentHero(incidentId, heroId) == false)	{
 			setOldFormParameters(request, response, incident, incidentId, "Erreur de base de données, veuillez essayez ultérieurement");
