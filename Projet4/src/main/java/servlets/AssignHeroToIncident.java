@@ -58,7 +58,7 @@ public class AssignHeroToIncident extends HttpServlet {
 		else if (incident == null) {
 			setOldFormParameters(request, response, incident, incidentId, "Cet incident n'existe pas");			
 		}
-		else if (!incidentTypeRepository.canTheHeroHandleTheIncident(heroId, incidentId)) {
+		else if (!incidentTypeRepository.canTheHeroHandleTheIncident(heroId, incident.getIncidentTypeID())) {
 			setOldFormParameters(request, response, incident, incidentId, "Ce héros n'est pas habilité à résoudre cet incident.");			
 		}
 		else if (incidentRepository.updateIncidentHero(incidentId, heroId) == false)	{

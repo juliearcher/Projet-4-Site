@@ -65,7 +65,7 @@ public class IncidentTypeRepository {
 		return "Erreur";
 	}
 	
-	public Boolean canTheHeroHandleTheIncident(int heroId, int incidentId)
+	public Boolean canTheHeroHandleTheIncident(int heroId, int incidentTypeId)
 	{
 		ResultSet result;
 		Boolean r;
@@ -74,7 +74,7 @@ public class IncidentTypeRepository {
 			      	"SELECT * FROM heroes_incidenttypes i " +
 			      	" WHERE i.HeroID = ? AND i.IncidentTypeID = ?;");
 			prepare.setInt(1, heroId);
-			prepare.setInt(2, incidentId);
+			prepare.setInt(2, incidentTypeId);
 			result = prepare.executeQuery();
 			r = result.next();
 			prepare.close();
