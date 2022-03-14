@@ -5,13 +5,16 @@
 <title>Get Hero Incidents</title>
 </head>
 <body>
-<p>Liste de vos incidents</p>
-<table>
-	<tr>
-		<td>Date de l'incident</td>
-		<td>Ville</td>
-		<td>Type de l'incident</td>
-	</tr>
+<h2>Liste de vos incidents</h2>
+<div class="table-responsive">
+<table class="table table-striped table-sm">
+	<thead>
+		<tr>
+			<th scope="col">Date de l'incident</td>
+			<th scope="col">Ville</td>
+			<th scope="col">Type de l'incident</td>
+		</tr>
+	</thead>
 	<c:forEach items="${ incidents }" var="incident">
 		<tr>
 		<td><fmt:formatDate value="${ incident.date }" pattern="dd/MM/yyyy"/></td>
@@ -20,5 +23,6 @@
 		</tr>
 		</c:forEach>
 </table>
+</div>
 </body>
 </html>
